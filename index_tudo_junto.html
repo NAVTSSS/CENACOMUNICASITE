@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="theme-color" content="#000000">
+<title>CenaComunica — Sua Marca em Evidência</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500;700&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #ffb500;
+  --black: #000000;
+  --white: #ffffff;
+  --gold-dim: rgba(255,181,0,0.12);
+  --gold-mid: rgba(255,181,0,0.4);
+  --off-white: #f5f3ee;
+  --dark-card: #0d0d0d;
+  --border: rgba(255,181,0,0.2);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--white);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+/* ── CURSOR — desktop only ── */
+@media (hover: hover) and (pointer: fine) {
+  body { cursor: none; }
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--gold); border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9999;
+    transform: translate(-50%,-50%);
+    transition: transform .15s ease, width .2s, height .2s;
+  }
+  .cursor-ring {
+    width: 40px; height: 40px;
+    border: 1.5px solid var(--gold); border-radius: 50%;
+    position: fixed; top: 0; left: 0;
+    pointer-events: none; z-index: 9998;
+    transform: translate(-50%,-50%);
+    transition: transform .35s ease;
+    opacity: .6;
+  }
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(0,0,0,.92);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  min-height: 64px;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.6rem; letter-spacing: .08em;
+  color: var(--white); text-decoration: none;
+  flex-shrink: 0;
+}
+.nav-logo span { color: var(--gold); }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: .78rem; font-weight: 500;
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--white); text-decoration: none; opacity: .7;
+  transition: opacity .2s, color .2s; white-space: nowrap;
+}
+.nav-links a:hover { opacity: 1; color: var(--gold); }
+.nav-cta {
+  background: var(--gold); color: var(--black);
+  padding: .6rem 1.4rem; font-size: .78rem; font-weight: 700;
+  letter-spacing: .1em; text-transform: uppercase; text-decoration: none;
+  transition: background .2s; white-space: nowrap; flex-shrink: 0;
+}
+.nav-cta:hover { background: var(--white); }
+
+/* Hamburger */
+.hamburger {
+  display: none; background: none; border: none;
+  color: var(--white); cursor: pointer; padding: 6px;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+.hamburger svg { display: block; }
+
+/* Mobile nav drawer */
+.mobile-menu {
+  display: none;
+  position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,.97);
+  z-index: 190; flex-direction: column;
+  padding: 2.5rem 2rem;
+  gap: 0; overflow-y: auto;
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu li { list-style: none; border-bottom: 1px solid rgba(255,181,0,.12); }
+.mobile-menu a {
+  display: block; padding: 1.1rem 0;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.2rem; letter-spacing: .05em;
+  color: var(--white); text-decoration: none;
+  transition: color .2s;
+}
+.mobile-menu a:hover, .mobile-menu a:active { color: var(--gold); }
+.mobile-menu .m-cta {
+  margin-top: 2rem; background: var(--gold); color: var(--black);
+  text-align: center; padding: 1rem; font-family: 'DM Sans', sans-serif;
+  font-size: .85rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+}
+
+/* ── HERO ── */
+.hero {
+  min-height: 100svh;
+  display: flex; flex-direction: column;
+  padding: 80px 1.5rem 3rem;
+  position: relative; overflow: hidden;
+}
+@supports not (min-height: 100svh) {
+  .hero { min-height: 100vh; }
+}
+.hero::before {
+  content: '';
+  position: absolute; top: -20%; right: -10%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(255,181,0,.15) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-bg-text {
+  position: absolute; bottom: -1rem; left: -.5rem;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(5rem, 22vw, 16rem);
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255,181,0,.07);
+  line-height: 1; pointer-events: none; user-select: none; white-space: nowrap;
+}
+.hero-inner {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 3rem; align-items: center;
+  position: relative; z-index: 2;
+  flex: 1;
+}
+.hero-badge {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: var(--gold-dim); border: 1px solid var(--border);
+  padding: .4rem 1rem; font-size: .68rem;
+  letter-spacing: .15em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 1.5rem;
+}
+.hero-badge::before { content: '●'; font-size: .45rem; animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+.hero-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(3.5rem, 8vw, 8.5rem);
+  line-height: .92; letter-spacing: .02em; margin-bottom: 1.2rem;
+}
+.hero-title .accent { color: var(--gold); }
+.hero-title .italic {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; font-size: .7em;
+  display: block; color: var(--white); opacity: .9;
+}
+.hero-sub {
+  font-size: .95rem; line-height: 1.7;
+  color: rgba(255,255,255,.6); max-width: 400px; margin-bottom: 2rem;
+}
+.hero-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--gold); color: var(--black);
+  padding: .9rem 2rem; font-size: .8rem; font-weight: 700;
+  letter-spacing: .12em; text-transform: uppercase;
+  text-decoration: none; display: inline-block;
+  transition: background .2s, transform .2s;
+  -webkit-tap-highlight-color: transparent;
+  border: none; cursor: pointer; font-family: 'DM Sans', sans-serif;
+}
+.btn-primary:hover { background: #e6a300; transform: translateY(-1px); }
+.btn-outline {
+  border: 1px solid rgba(255,255,255,.25); color: var(--white);
+  padding: .9rem 1.8rem; font-size: .8rem;
+  letter-spacing: .1em; text-transform: uppercase;
+  text-decoration: none; display: inline-block;
+  transition: border-color .2s, color .2s;
+  -webkit-tap-highlight-color: transparent;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+/* Hero visual */
+.hero-right { display: flex; justify-content: flex-end; align-items: center; }
+.hero-visual { position: relative; width: 100%; max-width: 440px; }
+.hero-photo-container {
+  width: 100%; height: 480px;
+  overflow: hidden; border: 1.5px solid var(--border);
+  box-shadow: 0 30px 80px rgba(0,0,0,.5);
+  position: relative;
+}
+.hero-photo-container img {
+  width: 100%; height: 100%; object-fit: cover;
+  object-position: center 30%; display: block;
+  filter: brightness(.95) contrast(1.05);
+  transition: transform .6s ease;
+}
+.hero-photo-container:hover img { transform: scale(1.03); }
+.hero-photo-container::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 55%);
+  pointer-events: none;
+}
+.hero-photo-overlay {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.5rem 1.8rem; z-index: 2;
+}
+.hero-photo-overlay h3 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 1.5rem; letter-spacing: .05em; color: var(--white);
+  line-height: 1.1; margin-bottom: .2rem;
+}
+.hero-photo-overlay p { font-size: .7rem; color: rgba(255,255,255,.6); letter-spacing: .08em; text-transform: uppercase; }
+.hero-float-badge {
+  position: absolute; left: -20px; top: 50px;
+  background: var(--gold); color: var(--black);
+  padding: 1rem 1.2rem; width: 130px; z-index: 3;
+  box-shadow: 0 10px 30px rgba(255,181,0,.3);
+}
+.hero-float-badge .num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2.5rem; line-height: 1;
+}
+.hero-float-badge .label { font-size: .6rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.hero-float-tag {
+  position: absolute; bottom: -20px; left: 20px;
+  background: rgba(0,0,0,.9); border: 1px solid var(--border);
+  padding: .7rem 1rem; font-size: .68rem;
+  color: rgba(255,255,255,.7); letter-spacing: .08em; z-index: 3;
+}
+.hero-photo-accent {
+  position: absolute; top: -8px; right: -8px;
+  width: 70px; height: 70px;
+  border-top: 2.5px solid var(--gold);
+  border-right: 2.5px solid var(--gold);
+  pointer-events: none; z-index: 3;
+}
+.hero-photo-accent-bottom {
+  position: absolute; bottom: -8px; left: -8px;
+  width: 70px; height: 70px;
+  border-bottom: 2.5px solid var(--gold);
+  border-left: 2.5px solid var(--gold);
+  pointer-events: none; z-index: 3;
+}
+.hero-scroll {
+  position: absolute; bottom: 2rem; left: 50%;
+  transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  font-size: .65rem; letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(255,255,255,.3); z-index: 2;
+}
+.hero-scroll-line {
+  width: 1px; height: 44px;
+  background: linear-gradient(to bottom, rgba(255,181,0,.8), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+@keyframes scrollLine {
+  0%{transform:scaleY(0);transform-origin:top}
+  50%{transform:scaleY(1);transform-origin:top}
+  51%{transform-origin:bottom}
+  100%{transform:scaleY(0);transform-origin:bottom}
+}
+
+/* ── STATS BAR ── */
+.stats-bar {
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+}
+.stat-item {
+  padding: 1.8rem 2rem;
+  border-right: 1px solid var(--border);
+  transition: background .3s;
+}
+.stat-item:last-child { border-right: none; }
+.stat-item:hover { background: var(--gold-dim); }
+.stat-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3rem; line-height: 1; color: var(--gold);
+}
+.stat-label { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: .25rem; }
+
+/* ── TICKER ── */
+.ticker { background: var(--gold); overflow: hidden; padding: .75rem 0; }
+.ticker-inner {
+  display: flex; white-space: nowrap;
+  animation: ticker 25s linear infinite;
+}
+.ticker-item {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: .95rem; letter-spacing: .15em; color: var(--black);
+  padding: 0 2rem; display: flex; align-items: center; gap: 1.5rem;
+}
+.ticker-item::after { content: '★'; font-size: .65rem; }
+@keyframes ticker { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ── SECTION BASE ── */
+section { padding: 5rem 1.5rem; }
+.section-tag {
+  display: inline-block; font-size: .65rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 1rem;
+}
+.section-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  letter-spacing: .02em; line-height: .95; margin-bottom: 1.5rem;
+}
+.section-title .italic {
+  font-family: 'Playfair Display', serif;
+  font-style: italic; color: var(--gold);
+}
+
+/* ── SOBRE ── */
+.sobre { background: var(--off-white); color: var(--black); }
+.sobre-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: center; }
+.sobre .section-title .italic { color: #c08800; }
+.sobre-text { font-size: 1rem; line-height: 1.8; color: #333; margin-bottom: 1.5rem; }
+.sobre-diferenciais { display: flex; flex-direction: column; gap: .8rem; margin-top: 1.5rem; }
+.diferencial {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1rem 1.2rem; background: var(--white);
+  border-left: 3px solid var(--gold);
+}
+.diferencial-icon { flex-shrink: 0; margin-top: .1rem; color: var(--gold); }
+.diferencial-icon svg { width: 20px; height: 20px; color: var(--gold); }
+.diferencial-text { font-size: .85rem; color: #444; line-height: 1.5; }
+.diferencial-text strong { display: block; margin-bottom: 2px; }
+.sobre-visual { position: relative; }
+.sobre-box-main {
+  width: 100%; height: 360px;
+  background: var(--gold); overflow: hidden; position: relative;
+}
+.sobre-box-main img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.sobre-box-main::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,.7) 0%, rgba(0,0,0,.2) 25%, transparent 50%);
+  pointer-events: none; z-index: 1;
+}
+.sobre-box-main-inner {
+  position: absolute; bottom: 0; left: 0;
+  padding: 1.2rem 1.5rem; z-index: 2;
+}
+.sobre-box-main-inner .big-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 3.5rem; color: var(--gold);
+  line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,.5);
+}
+.sobre-box-main-inner .big-label {
+  font-size: .72rem; color: rgba(255,255,255,.9);
+  letter-spacing: .1em; text-transform: uppercase;
+}
+.sobre-box-float {
+  background: var(--gold); color: var(--black);
+  padding: 1.2rem 1.5rem;
+}
+.sobre-box-float h4 { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; line-height: 1; margin-bottom: .2rem; }
+.sobre-box-float p { font-size: .72rem; font-weight: 500; opacity: .8; }
+
+/* ── SERVIÇOS ── */
+.servicos { background: var(--black); }
+.servicos-header {
+  display: flex; justify-content: space-between; align-items: flex-end;
+  margin-bottom: 3rem; gap: 1.5rem; flex-wrap: wrap;
+}
+.servicos-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1px; background: var(--border); border: 1px solid var(--border);
+}
+.servico-card {
+  background: var(--black); padding: 2.2rem 1.8rem;
+  position: relative; overflow: hidden; transition: background .3s;
+}
+.servico-card::before {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px; background: var(--gold);
+  transform: scaleX(0); transform-origin: left; transition: transform .4s ease;
+}
+.servico-card:hover { background: var(--dark-card); }
+.servico-card:hover::before { transform: scaleX(1); }
+.servico-num {
+  font-family: 'Bebas Neue', sans-serif; font-size: 3.5rem;
+  color: rgba(255,181,0,.12); line-height: 1; margin-bottom: 1.2rem;
+  transition: color .3s;
+}
+.servico-card:hover .servico-num { color: rgba(255,181,0,.25); }
+.servico-icon { margin-bottom: .8rem; }
+.servico-icon svg { width: 28px; height: 28px; color: var(--gold); }
+.servico-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.4rem;
+  letter-spacing: .05em; margin-bottom: .5rem; color: var(--white);
+}
+.servico-tag {
+  display: inline-block; background: var(--gold-dim);
+  border: 1px solid var(--border); color: var(--gold);
+  font-size: .6rem; letter-spacing: .1em; text-transform: uppercase;
+  padding: .2rem .5rem; margin-bottom: .7rem;
+}
+.servico-desc { font-size: .82rem; color: rgba(255,255,255,.5); line-height: 1.6; }
+
+/* ── CLIENTES ── */
+.clientes { background: var(--off-white); color: var(--black); }
+.clientes-grid {
+  display: grid; grid-template-columns: repeat(3,1fr);
+  gap: 1.5rem; margin-top: 2.5rem;
+}
+.cliente-card {
+  background: var(--white); padding: 2rem;
+  border: 1px solid rgba(0,0,0,.07);
+  transition: transform .3s, box-shadow .3s;
+}
+.cliente-card:hover { transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,.1); }
+.cliente-logo-placeholder {
+  width: 72px; height: 72px; background: var(--black);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; color: var(--gold);
+  font-size: .8rem; letter-spacing: .05em; text-align: center;
+  line-height: 1.2; padding: .4rem; margin-bottom: 1.2rem;
+}
+.cliente-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.3rem;
+  letter-spacing: .05em; margin-bottom: .2rem; color: var(--black);
+}
+.cliente-seg { font-size: .72rem; color: #888; letter-spacing: .08em; text-transform: uppercase; }
+
+/* ── EQUIPE ── */
+.equipe { background: var(--black); }
+.equipe-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1.5rem; max-width: 680px; margin: 2.5rem auto 0;
+}
+.membro-card {
+  background: var(--dark-card); border: 1px solid var(--border);
+  text-align: center; padding: 2.5rem 1.5rem;
+  transition: border-color .3s;
+}
+.membro-card:hover { border-color: var(--gold); }
+.membro-avatar {
+  width: 90px; height: 90px; border-radius: 50%;
+  margin: 0 auto 1.2rem;
+  background: linear-gradient(135deg, var(--gold), #c08800);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: 2rem; color: var(--black);
+  border: 2.5px solid var(--border);
+}
+.membro-name {
+  font-family: 'Bebas Neue', sans-serif; font-size: 1.7rem;
+  letter-spacing: .05em; color: var(--white); margin-bottom: .3rem;
+}
+.membro-role { font-size: .7rem; color: var(--gold); letter-spacing: .12em; text-transform: uppercase; }
+
+/* ── DEPOIMENTOS ── */
+.depoimentos { background: var(--off-white); color: var(--black); overflow: hidden; }
+.depoimentos-track {
+  display: flex; gap: 1.2rem; margin-top: 2.5rem;
+  overflow-x: auto; -webkit-overflow-scrolling: touch;
+  padding-bottom: 1rem; scroll-snap-type: x mandatory;
+  scrollbar-width: thin; scrollbar-color: var(--gold) transparent;
+}
+.depoimentos-track::-webkit-scrollbar { height: 4px; }
+.depoimentos-track::-webkit-scrollbar-track { background: transparent; }
+.depoimentos-track::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+.depoimento-card {
+  flex: 0 0 340px; scroll-snap-align: start;
+  background: var(--white); padding: 2rem;
+  border: 1px solid rgba(0,0,0,.07); position: relative;
+}
+.depoimento-card::before {
+  content: '"'; position: absolute; top: -.4rem; left: 1.2rem;
+  font-family: 'Playfair Display', serif; font-size: 4.5rem;
+  color: var(--gold); line-height: 1; opacity: .4;
+}
+.stars { color: var(--gold); font-size: .85rem; margin-bottom: .8rem; }
+.depoimento-text { font-size: .85rem; line-height: 1.7; color: #444; margin-bottom: 1.2rem; font-style: italic; }
+.depoimento-autor { display: flex; align-items: center; gap: .8rem; }
+.autor-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: var(--black); display: flex; align-items: center; justify-content: center;
+  font-family: 'Bebas Neue', sans-serif; font-size: .95rem; color: var(--gold); flex-shrink: 0;
+}
+.autor-name { font-weight: 600; font-size: .82rem; color: var(--black); }
+.autor-company { font-size: .68rem; color: #888; }
+.add-depo-card {
+  flex: 0 0 340px; scroll-snap-align: start;
+  background: var(--gold-dim); border: 2px dashed var(--gold);
+  padding: 2rem; display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center; gap: .8rem; color: #666; font-size: .82rem;
+}
+.add-depo-card svg { opacity: .5; }
+.add-depo-card strong { color: #333; }
+
+/* ── CONTATO ── */
+.contato { background: var(--black); }
+.contato-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 4rem; align-items: start;
+}
+.contato-item {
+  display: flex; align-items: flex-start; gap: 1rem;
+  padding: 1.2rem 0; border-bottom: 1px solid var(--border);
+}
+.contato-item:last-child { border-bottom: none; }
+.contato-icon {
+  width: 42px; height: 42px; flex-shrink: 0;
+  background: var(--gold-dim); border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; color: var(--gold);
+}
+.contato-icon svg { width: 18px; height: 18px; color: var(--gold); }
+.contato-label {
+  font-size: .62rem; letter-spacing: .12em; text-transform: uppercase;
+  color: rgba(255,255,255,.35); margin-bottom: .25rem;
+}
+.contato-value { font-size: .9rem; color: var(--white); }
+.contato-value a { color: var(--gold); text-decoration: none; }
+.contato-value a:hover { text-decoration: underline; }
+
+/* ── FORM ── */
+.form-group { margin-bottom: 1rem; }
+.form-group label {
+  display: block; font-size: .68rem; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.4); margin-bottom: .4rem;
+}
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%; background: var(--dark-card);
+  border: 1px solid var(--border); color: var(--white);
+  padding: .85rem 1rem; font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; outline: none; transition: border-color .2s;
+  -webkit-appearance: none; border-radius: 0;
+}
+.form-group input:focus, .form-group textarea:focus, .form-group select:focus { border-color: var(--gold); }
+.form-group textarea { height: 120px; resize: vertical; }
+.form-group select { appearance: none; cursor: pointer; }
+.form-group select option { background: var(--black); }
+.form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,.3); }
+
+/* ── FOOTER ── */
+footer {
+  background: var(--dark-card);
+  border-top: 1px solid var(--border);
+  padding: 3.5rem 1.5rem 2rem;
+}
+.footer-grid {
+  display: grid; grid-template-columns: 2fr 1fr 1fr;
+  gap: 3rem; margin-bottom: 2.5rem;
+}
+.footer-brand .brand-name {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2rem; color: var(--white); letter-spacing: .08em; margin-bottom: .6rem;
+}
+.footer-brand .brand-name span { color: var(--gold); }
+.footer-brand p { font-size: .82rem; color: rgba(255,255,255,.4); line-height: 1.7; max-width: 260px; }
+.footer-social { display: flex; gap: .7rem; margin-top: 1.2rem; }
+.social-btn {
+  width: 38px; height: 38px; background: var(--gold-dim);
+  border: 1px solid var(--border); display: flex; align-items: center;
+  justify-content: center; color: var(--gold); text-decoration: none;
+  transition: background .2s, color .2s; -webkit-tap-highlight-color: transparent;
+}
+.social-btn svg { width: 16px; height: 16px; }
+.social-btn:hover { background: var(--gold); color: var(--black); }
+.footer-col h5 {
+  font-size: .68rem; letter-spacing: .15em; text-transform: uppercase;
+  color: rgba(255,255,255,.3); margin-bottom: 1rem;
+}
+.footer-col ul { list-style: none; display: flex; flex-direction: column; gap: .5rem; }
+.footer-col ul a { font-size: .82rem; color: rgba(255,255,255,.5); text-decoration: none; transition: color .2s; }
+.footer-col ul a:hover { color: var(--gold); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 1.5rem;
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: .72rem; color: rgba(255,255,255,.25); flex-wrap: wrap; gap: .5rem;
+}
+
+/* ── FADE ANIMATION ── */
+.fade-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .7s ease, transform .7s ease;
+}
+.fade-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── WA FLOAT ── */
+.wa-float {
+  position: fixed; bottom: 24px; right: 20px; z-index: 300;
+  width: 52px; height: 52px; background: #25d366;
+  border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(37,211,102,.4);
+  text-decoration: none; -webkit-tap-highlight-color: transparent;
+  transition: transform .2s, box-shadow .2s;
+}
+.wa-float:hover, .wa-float:active { transform: scale(1.08); }
+.wa-float svg { width: 26px; height: 26px; }
+
+/* ══════════════════════════════════════
+   TABLET  (max 1024px)
+══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  nav { padding: .9rem 1.5rem; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: block; }
+
+  .hero { padding: 80px 1.5rem 3rem; }
+  .hero-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+  .hero-right { justify-content: center; }
+  .hero-visual { max-width: 420px; width: 100%; }
+  .hero-photo-container { height: 380px; }
+  .hero-float-badge { left: -10px; top: 40px; }
+  .hero-scroll { display: none; }
+
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .stat-item { border-bottom: 1px solid var(--border); padding: 1.4rem 1.5rem; }
+
+  .sobre-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .sobre-box-main { height: 280px; }
+
+  .servicos-grid { grid-template-columns: 1fr 1fr; }
+  .servicos-header { flex-direction: column; align-items: flex-start; }
+
+  .clientes-grid { grid-template-columns: 1fr 1fr; }
+
+  .equipe-grid { max-width: 100%; }
+
+  .contato-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+
+/* ══════════════════════════════════════
+   MOBILE  (max 640px)
+══════════════════════════════════════ */
+@media (max-width: 640px) {
+  nav { padding: .8rem 1rem; min-height: 58px; }
+  .nav-logo { font-size: 1.4rem; }
+
+  .mobile-menu { top: 58px; }
+
+  section { padding: 3.5rem 1rem; }
+
+  /* HERO */
+  .hero { padding: 70px 1rem 2.5rem; }
+  .hero-title { font-size: clamp(2.8rem, 13vw, 4rem); }
+  .hero-sub { font-size: .88rem; }
+  .hero-badge { font-size: .6rem; padding: .3rem .75rem; margin-bottom: 1.2rem; }
+  .hero-actions { flex-direction: column; gap: .7rem; }
+  .hero-actions .btn-primary,
+  .hero-actions .btn-outline { width: 100%; text-align: center; padding: 1rem; }
+  .hero-visual { max-width: 100%; }
+  .hero-photo-container { height: 300px; }
+  .hero-float-badge { left: 0; top: auto; bottom: -16px; width: 110px; padding: .7rem .9rem; }
+  .hero-float-badge .num { font-size: 1.9rem; }
+  .hero-float-badge .label { font-size: .52rem; }
+  .hero-float-tag { bottom: -38px; font-size: .6rem; padding: .5rem .7rem; }
+  .hero-photo-accent, .hero-photo-accent-bottom { display: none; }
+
+  /* STATS */
+  .stats-bar { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 1rem .85rem; }
+  .stat-num { font-size: 2.2rem; }
+  .stat-label { font-size: .62rem; }
+
+  /* SOBRE */
+  .sobre-box-main { height: 230px; }
+  .sobre-text { font-size: .9rem; }
+  .diferencial { padding: .85rem 1rem; }
+  .diferencial-text { font-size: .78rem; }
+
+  /* SERVIÇOS */
+  .servicos-grid { grid-template-columns: 1fr; }
+  .servico-card { padding: 1.8rem 1.4rem; }
+  .servico-num { font-size: 2.8rem; }
+  .servico-name { font-size: 1.3rem; }
+
+  /* CLIENTES */
+  .clientes-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .cliente-card { padding: 1.5rem; }
+
+  /* EQUIPE */
+  .equipe-grid { grid-template-columns: 1fr; max-width: 320px; }
+  .membro-card { padding: 2rem 1.2rem; }
+
+  /* DEPOIMENTOS */
+  .depoimento-card { flex: 0 0 calc(100vw - 2rem); }
+  .add-depo-card { flex: 0 0 calc(100vw - 2rem); }
+
+  /* CONTATO */
+  .form-group input,
+  .form-group textarea,
+  .form-group select { font-size: 16px; /* prevent iOS zoom */ }
+
+  /* FOOTER */
+  footer { padding: 2.5rem 1rem 1.5rem; }
+  .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-brand { grid-column: auto; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  /* WA float */
+  .wa-float { bottom: 18px; right: 14px; width: 48px; height: 48px; }
+  .wa-float svg { width: 22px; height: 22px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Custom cursor (desktop only — hidden on touch via CSS) -->
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+<div class="cursor-ring" id="cursorRing" aria-hidden="true"></div>
+
+<!-- ── NAV ── -->
+<nav role="navigation" aria-label="Menu principal">
+  <a href="#inicio" class="nav-logo">Cena<span>Comunica</span></a>
+  <ul class="nav-links" role="list">
+    <li><a href="#sobre">Sobre</a></li>
+    <li><a href="#servicos">Serviços</a></li>
+    <li><a href="#clientes">Clientes</a></li>
+    <li><a href="#equipe">Equipe</a></li>
+    <li><a href="#contato">Contato</a></li>
+  </ul>
+  <a href="https://wa.me/5500000000000" class="nav-cta" target="_blank" rel="noopener">Fale conosco</a>
+  <button class="hamburger" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileMenu">
+    <svg id="iconOpen" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/>
+    </svg>
+    <svg id="iconClose" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+</nav>
+
+<!-- Mobile menu drawer -->
+<ul class="mobile-menu" id="mobileMenu" role="list" aria-hidden="true">
+  <li><a href="#sobre" class="mm-link">Sobre</a></li>
+  <li><a href="#servicos" class="mm-link">Serviços</a></li>
+  <li><a href="#clientes" class="mm-link">Clientes</a></li>
+  <li><a href="#equipe" class="mm-link">Equipe</a></li>
+  <li><a href="#depoimentos" class="mm-link">Depoimentos</a></li>
+  <li><a href="#contato" class="mm-link">Contato</a></li>
+  <li><a href="https://wa.me/5500000000000" class="mm-link m-cta" target="_blank" rel="noopener">Fale conosco no WhatsApp</a></li>
+</ul>
+
+<!-- ── HERO ── -->
+<section class="hero" id="inicio" aria-label="Início">
+  <div class="hero-bg-text" aria-hidden="true">CENA</div>
+  <div class="hero-inner">
+    <div class="hero-left fade-up">
+      <div class="hero-badge">Agência 360°</div>
+      <h1 class="hero-title">
+        Sua marca<br>em
+        <span class="accent">Evidência</span>
+        <span class="italic">do jeito certo</span>
+      </h1>
+      <p class="hero-sub">Fazemos acontecer. Do tráfego pago ao gerenciamento de redes, conectamos marcas às pessoas certas com estratégia real e criatividade sem limite.</p>
+      <div class="hero-actions">
+        <a href="#servicos" class="btn-primary">Nossos Serviços</a>
+        <a href="#contato" class="btn-outline">Falar conosco</a>
+      </div>
+    </div>
+    <div class="hero-right fade-up">
+      <div class="hero-visual">
+        <div class="hero-photo-accent" aria-hidden="true"></div>
+        <div class="hero-photo-accent-bottom" aria-hidden="true"></div>
+        <div class="hero-float-badge" aria-hidden="true">
+          <div class="num">20+</div>
+          <div class="label">Anos de Experiência</div>
+        </div>
+        <div class="hero-photo-container">
+          <img src="cenacomunica-equipe.jpg" alt="Tata Gadelha e Helô Paiva — Fundadoras da CenaComunica" loading="eager">
+          <div class="hero-photo-overlay">
+            <h3>Tata &amp; Helô</h3>
+            <p>Fundadoras da CenaComunica</p>
+          </div>
+        </div>
+        <div class="hero-float-tag" aria-hidden="true">Tráfego · Conteúdo · Conexões</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll" aria-hidden="true">
+    <div class="hero-scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ── STATS BAR ── -->
+<div class="stats-bar" role="list" aria-label="Números da agência">
+  <div class="stat-item fade-up" role="listitem">
+    <div class="stat-num">20+</div>
+    <div class="stat-label">Anos de experiência</div>
+  </div>
+  <div class="stat-item fade-up" role="listitem">
+    <div class="stat-num">100+</div>
+    <div class="stat-label">Projetos entregues</div>
+  </div>
+  <div class="stat-item fade-up" role="listitem">
+    <div class="stat-num">360°</div>
+    <div class="stat-label">Cobertura total</div>
+  </div>
+  <div class="stat-item fade-up" role="listitem">
+    <div class="stat-num">10+</div>
+    <div class="stat-label">Anos no mercado</div>
+  </div>
+</div>
+
+<!-- ── TICKER ── -->
+<div class="ticker" aria-hidden="true">
+  <div class="ticker-inner">
+    <span class="ticker-item">Marketing 360°</span>
+    <span class="ticker-item">Tráfego Pago</span>
+    <span class="ticker-item">Gestão de Redes</span>
+    <span class="ticker-item">Conexões com Influencers</span>
+    <span class="ticker-item">Branding</span>
+    <span class="ticker-item">Marketing Médico</span>
+    <span class="ticker-item">Marketing 360°</span>
+    <span class="ticker-item">Tráfego Pago</span>
+    <span class="ticker-item">Gestão de Redes</span>
+    <span class="ticker-item">Conexões com Influencers</span>
+    <span class="ticker-item">Branding</span>
+    <span class="ticker-item">Marketing Médico</span>
+  </div>
+</div>
+
+<!-- ── SOBRE ── -->
+<section class="sobre" id="sobre" aria-label="Sobre a agência">
+  <div class="sobre-grid">
+    <div class="fade-up">
+      <span class="section-tag">Quem somos</span>
+      <h2 class="section-title">Com a <span class="italic">Cena,</span><br>sua marca acontece</h2>
+      <p class="sobre-text">A CenaComunica é uma agência de comunicação full-service com mais de 10 anos no mercado e mais de 20 anos de experiência acumulada. Somos especialistas em marketing médico, marcas autorais e pequenas empresas que querem crescer de verdade.</p>
+      <p class="sobre-text">Nossa atuação é 360° — do tráfego pago à gestão completa de redes sociais, incluindo conexões estratégicas com influenciadoras. Estamos em cada detalhe da sua presença digital.</p>
+      <div class="sobre-diferenciais">
+        <div class="diferencial">
+          <div class="diferencial-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <div class="diferencial-text"><strong>Trabalhamos com pessoas reais.</strong> Sem automação fria — contato direto, reuniões de pauta e estratégia personalizada.</div>
+        </div>
+        <div class="diferencial">
+          <div class="diferencial-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          </div>
+          <div class="diferencial-text"><strong>Reuniões semanais de pauta.</strong> Planejamos junto com você, semana a semana, para que nada saia fora do radar.</div>
+        </div>
+        <div class="diferencial">
+          <div class="diferencial-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          </div>
+          <div class="diferencial-text"><strong>Fazemos acontecer!</strong> Não só planejamos — executamos, monitoramos e ajustamos até o resultado aparecer.</div>
+        </div>
+      </div>
+    </div>
+    <div class="sobre-visual fade-up">
+      <div class="sobre-box-main">
+        <img src="cenacomunica-sobre.png" alt="Tata Gadelha e Helô Paiva — CenaComunica">
+        <div class="sobre-box-main-inner">
+          <div class="big-num">10</div>
+          <div class="big-label">Anos no mercado</div>
+        </div>
+      </div>
+      <div class="sobre-box-float">
+        <h4>Marketing 360°</h4>
+        <p>Você em cena, o tempo todo!</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── SERVIÇOS ── -->
+<section class="servicos" id="servicos" aria-label="Serviços">
+  <div class="servicos-header fade-up">
+    <div>
+      <span class="section-tag">O que oferecemos</span>
+      <h2 class="section-title">Nossos<br><span class="italic">Serviços</span></h2>
+    </div>
+    <a href="#contato" class="btn-primary">Solicitar orçamento</a>
+  </div>
+  <div class="servicos-grid">
+    <div class="servico-card fade-up">
+      <div class="servico-num">01</div>
+      <div class="servico-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="22" y1="12" x2="18" y2="12"/><line x1="6" y1="12" x2="2" y2="12"/><line x1="12" y1="6" x2="12" y2="2"/><line x1="12" y1="22" x2="12" y2="18"/></svg></div>
+      <div class="servico-name">Marketing 360°</div>
+      <div class="servico-tag">Serviço completo</div>
+      <div class="servico-desc">Você em cena, o tempo todo! Estratégia integrada do online ao offline para sua marca crescer de forma consistente.</div>
+    </div>
+    <div class="servico-card fade-up">
+      <div class="servico-num">02</div>
+      <div class="servico-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg></div>
+      <div class="servico-name">Gestão de Redes Sociais</div>
+      <div class="servico-tag">Presença digital</div>
+      <div class="servico-desc">Criação, curadoria e gestão de conteúdo estratégico para Instagram, TikTok, LinkedIn e além.</div>
+    </div>
+    <div class="servico-card fade-up">
+      <div class="servico-num">03</div>
+      <div class="servico-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
+      <div class="servico-name">Tráfego Pago</div>
+      <div class="servico-tag">Performance</div>
+      <div class="servico-desc">Campanhas otimizadas no Meta Ads e Google Ads. Seu investimento trabalhando de verdade pelo seu crescimento.</div>
+    </div>
+    <div class="servico-card fade-up">
+      <div class="servico-num">04</div>
+      <div class="servico-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+      <div class="servico-name">Conexões com Influencers</div>
+      <div class="servico-tag">Parcerias</div>
+      <div class="servico-desc">Conectamos sua marca às influenciadoras certas para campanhas autênticas e com alto impacto no seu público.</div>
+    </div>
+    <div class="servico-card fade-up">
+      <div class="servico-num">05</div>
+      <div class="servico-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg></div>
+      <div class="servico-name">Branding &amp; Identidade</div>
+      <div class="servico-tag">Identidade visual</div>
+      <div class="servico-desc">Construímos ou fortalecemos a identidade visual da sua marca, garantindo consistência e memorabilidade.</div>
+    </div>
+    <div class="servico-card fade-up">
+      <div class="servico-num">06</div>
+      <div class="servico-icon"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/><path d="M3.22 12H9.5l1.5-3 2 4.5 1.5-3 1.5 3H21"/></svg></div>
+      <div class="servico-name">Marketing Médico</div>
+      <div class="servico-tag">Saúde &amp; bem-estar</div>
+      <div class="servico-desc">Estratégias específicas para clínicas, consultórios e profissionais da saúde, sempre dentro das normas do CFM.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CLIENTES ── -->
+<section class="clientes" id="clientes" aria-label="Clientes">
+  <div class="fade-up">
+    <span class="section-tag">Quem confia em nós</span>
+    <h2 class="section-title" style="color:var(--black)">Nossos<br><span class="italic">Clientes</span></h2>
+  </div>
+  <div class="clientes-grid">
+    <div class="cliente-card fade-up">
+      <div class="cliente-logo-placeholder">CARDIO<br>PED</div>
+      <div class="cliente-name">Cardioped</div>
+      <div class="cliente-seg">Saúde / Cardiologia Pediátrica</div>
+    </div>
+    <div class="cliente-card fade-up">
+      <div class="cliente-logo-placeholder">T&amp;B</div>
+      <div class="cliente-name">Therapy &amp; Beauty</div>
+      <div class="cliente-seg">Estética / Beleza</div>
+    </div>
+    <div class="cliente-card fade-up">
+      <div class="cliente-logo-placeholder">BEM<br>ESTAR</div>
+      <div class="cliente-name">Bem Estar Bem</div>
+      <div class="cliente-seg">Saúde / Bem-estar</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── EQUIPE ── -->
+<section class="equipe" id="equipe" aria-label="Equipe">
+  <div class="fade-up" style="text-align:center">
+    <span class="section-tag">Por trás da cena</span>
+    <h2 class="section-title">Nossa<br><span class="italic">Equipe</span></h2>
+  </div>
+  <div class="equipe-grid">
+    <div class="membro-card fade-up">
+      <div class="membro-avatar">TG</div>
+      <div class="membro-name">Tata Gadelha</div>
+      <div class="membro-role">Co-fundadora &amp; Diretora Criativa</div>
+    </div>
+    <div class="membro-card fade-up">
+      <div class="membro-avatar">HP</div>
+      <div class="membro-name">Helô Paiva</div>
+      <div class="membro-role">Co-fundadora &amp; Diretora Estratégica</div>
+    </div>
+  </div>
+</section>
+
+<!-- ── DEPOIMENTOS ── -->
+<section class="depoimentos" id="depoimentos" aria-label="Depoimentos">
+  <div class="fade-up">
+    <span class="section-tag">O que dizem nossos clientes</span>
+    <h2 class="section-title" style="color:var(--black)">Depoi<span class="italic">mentos</span></h2>
+  </div>
+  <div class="depoimentos-track" role="list">
+    <div class="depoimento-card fade-up" role="listitem">
+      <div class="stars">★★★★★</div>
+      <p class="depoimento-text">"A equipe da CenaComunica transformou completamente a presença digital da nossa clínica. Reuniões semanais e uma equipe super comprometida — sinto que realmente me ouvem!"</p>
+      <div class="depoimento-autor">
+        <div class="autor-avatar">CP</div>
+        <div>
+          <div class="autor-name">Dr. Cliente Satisfeito</div>
+          <div class="autor-company">Cardioped</div>
+        </div>
+      </div>
+    </div>
+    <div class="depoimento-card fade-up" role="listitem">
+      <div class="stars">★★★★★</div>
+      <p class="depoimento-text">"Parceria incrível! A CenaComunica entendeu a identidade da nossa marca desde o primeiro dia. Os resultados com tráfego pago superaram todas as expectativas."</p>
+      <div class="depoimento-autor">
+        <div class="autor-avatar">TB</div>
+        <div>
+          <div class="autor-name">Representante</div>
+          <div class="autor-company">Therapy &amp; Beauty</div>
+        </div>
+      </div>
+    </div>
+    <div class="depoimento-card fade-up" role="listitem">
+      <div class="stars">★★★★★</div>
+      <p class="depoimento-text">"O diferencial é que elas fazem acontecer de verdade. Não é só planejamento em papel — é estratégia e execução juntos, com muito cuidado e dedicação."</p>
+      <div class="depoimento-autor">
+        <div class="autor-avatar">BE</div>
+        <div>
+          <div class="autor-name">Representante</div>
+          <div class="autor-company">Bem Estar Bem</div>
+        </div>
+      </div>
+    </div>
+    <div class="add-depo-card" role="listitem">
+      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/><line x1="12" y1="10" x2="12" y2="14"/><line x1="10" y1="12" x2="14" y2="12"/></svg>
+      <strong>Quer ver seu depoimento aqui?</strong>
+      <p>Entre em contato conosco e compartilhe sua experiência.</p>
+      <a href="#contato" class="btn-primary" style="font-size:.75rem;padding:.65rem 1.3rem">Falar conosco</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── CONTATO ── -->
+<section class="contato" id="contato" aria-label="Contato">
+  <div class="fade-up" style="text-align:center;margin-bottom:3.5rem">
+    <span class="section-tag">Bora conversar</span>
+    <h2 class="section-title">Entre em<br><span class="italic">Contato</span></h2>
+  </div>
+  <div class="contato-grid">
+    <div class="contato-info fade-up">
+      <div class="contato-item">
+        <div class="contato-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+        <div>
+          <div class="contato-label">WhatsApp</div>
+          <div class="contato-value"><a href="https://wa.me/5500000000000" target="_blank" rel="noopener">(00) 00000-0000</a></div>
+        </div>
+      </div>
+      <div class="contato-item">
+        <div class="contato-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+        <div>
+          <div class="contato-label">E-mail</div>
+          <div class="contato-value"><a href="mailto:contato@cenacomunica.com.br">contato@cenacomunica.com.br</a></div>
+        </div>
+      </div>
+      <div class="contato-item">
+        <div class="contato-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></div>
+        <div>
+          <div class="contato-label">Instagram</div>
+          <div class="contato-value"><a href="https://instagram.com/cenacomunica" target="_blank" rel="noopener">@cenacomunica</a></div>
+        </div>
+      </div>
+      <div class="contato-item">
+        <div class="contato-icon"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+        <div>
+          <div class="contato-label">Atendimento</div>
+          <div class="contato-value">Seg a Sex — 9h às 18h</div>
+        </div>
+      </div>
+    </div>
+    <div class="fade-up">
+      <div class="form-group">
+        <label for="f-nome">Nome completo</label>
+        <input type="text" id="f-nome" name="nome" placeholder="Seu nome" autocomplete="name">
+      </div>
+      <div class="form-group">
+        <label for="f-email">E-mail</label>
+        <input type="email" id="f-email" name="email" placeholder="seu@email.com" autocomplete="email">
+      </div>
+      <div class="form-group">
+        <label for="f-tel">WhatsApp</label>
+        <input type="tel" id="f-tel" name="tel" placeholder="(00) 00000-0000" autocomplete="tel" inputmode="tel">
+      </div>
+      <div class="form-group">
+        <label for="f-serv">Serviço de interesse</label>
+        <select id="f-serv" name="servico">
+          <option value="">Selecione um serviço</option>
+          <option>Marketing 360°</option>
+          <option>Gestão de Redes Sociais</option>
+          <option>Tráfego Pago</option>
+          <option>Conexões com Influencers</option>
+          <option>Branding &amp; Identidade</option>
+          <option>Marketing Médico</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="f-msg">Mensagem</label>
+        <textarea id="f-msg" name="mensagem" placeholder="Fale um pouco sobre o seu projeto..."></textarea>
+      </div>
+      <button type="button" id="formBtn" class="btn-primary" style="width:100%;text-align:center;padding:1rem">Enviar mensagem →</button>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="brand-name">Cena<span>Comunica</span></div>
+      <p>Sua marca em evidência. Estratégia, criatividade e resultado em cada projeto.</p>
+      <div class="footer-social">
+        <a href="https://instagram.com/cenacomunica" class="social-btn" target="_blank" rel="noopener" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="https://wa.me/5500000000000" class="social-btn" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </a>
+        <a href="mailto:contato@cenacomunica.com.br" class="social-btn" aria-label="E-mail">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h5>Serviços</h5>
+      <ul>
+        <li><a href="#servicos">Marketing 360°</a></li>
+        <li><a href="#servicos">Gestão de Redes</a></li>
+        <li><a href="#servicos">Tráfego Pago</a></li>
+        <li><a href="#servicos">Influencers</a></li>
+        <li><a href="#servicos">Branding</a></li>
+        <li><a href="#servicos">Marketing Médico</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h5>Empresa</h5>
+      <ul>
+        <li><a href="#sobre">Sobre nós</a></li>
+        <li><a href="#equipe">Equipe</a></li>
+        <li><a href="#clientes">Clientes</a></li>
+        <li><a href="#depoimentos">Depoimentos</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© CenaComunica. Todos os direitos reservados.</span>
+    <span>Brasil</span>
+  </div>
+</footer>
+
+<!-- WA Float -->
+<a href="https://wa.me/5500000000000" class="wa-float" target="_blank" rel="noopener" aria-label="Fale conosco no WhatsApp">
+  <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/>
+  </svg>
+</a>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ── Custom cursor (desktop only) ── */
+  var isTouchDevice = ('ontouchstart' in window) || navigator.maxTouchPoints > 0;
+  if (!isTouchDevice) {
+    var cur = document.getElementById('cursor');
+    var ring = document.getElementById('cursorRing');
+    if (cur && ring) {
+      document.addEventListener('mousemove', function (e) {
+        cur.style.left = e.clientX + 'px';
+        cur.style.top  = e.clientY + 'px';
+        setTimeout(function () {
+          ring.style.left = e.clientX + 'px';
+          ring.style.top  = e.clientY + 'px';
+        }, 80);
+      });
+      document.querySelectorAll('a, button, .servico-card, .cliente-card').forEach(function (el) {
+        el.addEventListener('mouseenter', function () {
+          cur.style.transform  = 'translate(-50%,-50%) scale(2.5)';
+          ring.style.transform = 'translate(-50%,-50%) scale(1.4)';
+        });
+        el.addEventListener('mouseleave', function () {
+          cur.style.transform  = 'translate(-50%,-50%) scale(1)';
+          ring.style.transform = 'translate(-50%,-50%) scale(1)';
+        });
+      });
+    }
+  }
+
+  /* ── Mobile menu ── */
+  var menuBtn    = document.getElementById('menuBtn');
+  var mobileMenu = document.getElementById('mobileMenu');
+  var iconOpen   = document.getElementById('iconOpen');
+  var iconClose  = document.getElementById('iconClose');
+
+  function toggleMenu(force) {
+    var isOpen = mobileMenu.classList.contains('open');
+    var open   = (force !== undefined) ? force : !isOpen;
+    mobileMenu.classList.toggle('open', open);
+    mobileMenu.setAttribute('aria-hidden', String(!open));
+    menuBtn.setAttribute('aria-expanded', String(open));
+    iconOpen.style.display  = open ? 'none'  : 'block';
+    iconClose.style.display = open ? 'block' : 'none';
+    document.body.style.overflow = open ? 'hidden' : '';
+  }
+
+  if (menuBtn) {
+    menuBtn.addEventListener('click', function () { toggleMenu(); });
+  }
+
+  /* Close on menu link tap */
+  document.querySelectorAll('.mm-link').forEach(function (a) {
+    a.addEventListener('click', function () { toggleMenu(false); });
+  });
+
+  /* Close on outside tap */
+  document.addEventListener('click', function (e) {
+    if (mobileMenu.classList.contains('open') &&
+        !mobileMenu.contains(e.target) && e.target !== menuBtn &&
+        !menuBtn.contains(e.target)) {
+      toggleMenu(false);
+    }
+  });
+
+  /* ── Fade-up on scroll ── */
+  var fadeEls = document.querySelectorAll('.fade-up');
+  if ('IntersectionObserver' in window) {
+    var obs = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          obs.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    fadeEls.forEach(function (el) { obs.observe(el); });
+  } else {
+    fadeEls.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── Nav active link on scroll ── */
+  var sections  = document.querySelectorAll('section[id]');
+  var navLinks  = document.querySelectorAll('.nav-links a');
+
+  window.addEventListener('scroll', function () {
+    var scrollY = window.scrollY;
+    var current = '';
+    sections.forEach(function (s) {
+      if (scrollY >= s.offsetTop - 140) current = s.id;
+    });
+    navLinks.forEach(function (a) {
+      var match = a.getAttribute('href') === '#' + current;
+      a.style.color   = match ? 'var(--gold)' : '';
+      a.style.opacity = match ? '1'           : '';
+    });
+  }, { passive: true });
+
+  /* ── Form submit ── */
+  var formBtn = document.getElementById('formBtn');
+  if (formBtn) {
+    formBtn.addEventListener('click', function () {
+      var nome  = document.getElementById('f-nome');
+      var email = document.getElementById('f-email');
+      if (!nome.value.trim() || !email.value.trim()) {
+        alert('Por favor, preencha nome e e-mail.');
+        return;
+      }
+      formBtn.textContent = 'Mensagem enviada! Em breve entraremos em contato.';
+      formBtn.style.background = '#2a9d2a';
+      formBtn.disabled = true;
+    });
+  }
+
+})();
+</script>
+</body>
+</html>
